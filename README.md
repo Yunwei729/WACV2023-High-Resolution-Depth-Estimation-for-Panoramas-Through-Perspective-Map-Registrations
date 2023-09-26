@@ -4,8 +4,9 @@ Visual Studio >= 2019 (recommended)
 
 Getting the project
 1. Getting the sources shell
-git clone 
-
+```
+git clone https://github.com/B10756015/WACV2022.git
+```
 # To start
 2. create folder 
 ```
