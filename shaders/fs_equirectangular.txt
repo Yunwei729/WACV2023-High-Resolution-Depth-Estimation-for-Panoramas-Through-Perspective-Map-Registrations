@@ -1,0 +1,33 @@
+#version 130
+
+varying vec3 N;
+varying vec3 v;  
+varying vec4 p;  //original position in object space (x: 0~1, y: 0~1, z=0)
+
+//correspond to opengl binded textures:
+//uniform sampler1D texture_sdepth;
+
+//cubemap texture sampler
+uniform samplerCube cubemap;
+
+uniform float panorama_fovy;  //total fovy of the original panorama projection. in radian
+uniform float panorama_middle;  //horizontal angle offset (default: 0')
+
+uniform float alpha;  //0~1 alpha value
+
+#define PI 3.141592653589793238462643
+
+void main (void)  
+{  
+   //get color from the cubemap, index by dir from (0,0,0)
+   //the dir is a position on a sphere indexed by azimuth (horizontal) and zenith (vertical)
+   
+   float azimuth = p.x * 2 * PI;  //0~1 to 0' to 360'
+   azimuth = mod(azimuth + panorama_middle, 2*PI);
+
+   float zenith = PI/2 + (1 - p.y - 0.5) * panorama_fovy;  //0~1 to fovy range
+
+   vec3 dir = vec3(sin(zenith)*cos(azimuth), sin(zenith)*sin(azimuth), cos(zenith));  //the normalized dir to index cubemap
+
+   gl_FragColor = vec4( texture(cubemap, dir).xyz, alpha);   
+}

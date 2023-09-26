@@ -1,0 +1,59 @@
+#version 130
+
+varying vec3 N;
+varying vec3 v;  
+varying vec4 p;  //original position in object space (x: 0~1, y: 0~1, z=0)
+
+//correspond to opengl bind textures:
+uniform sampler2D texture0;
+//uniform sampler2D texture1;
+uniform samplerCube cubemap; // cubemap texture sampler
+
+uniform float panorama_fovy;  //total fovy of the original panorama projection. in radian
+uniform float panorama_middle;  //middle horizontal angle (default: 0')
+
+#define PI 3.141592653589793238462643
+
+void main (void)  
+{  
+   //get the "dir" which is a position on a sphere indexed by azimuth (horizontal) and zenith (vertical)
+   
+   float azimuth = PI - p.x * 2 * PI;  //0~1 to 0'~360'
+   azimuth = mod(azimuth + panorama_middle, 2*PI);
+
+   float zenith = PI/2 + (1 - p.y - 0.5) * panorama_fovy;  //0~1 to fovy range 
+
+   vec3 dir = vec3(sin(zenith)*cos(azimuth), sin(zenith)*sin(azimuth), cos(zenith));  //the normalized dir to index cubemap
+
+   //this fragment's "line direction" is indexed from the cubemap!
+   vec3 LineDir = vec3(texture(cubemap, dir));
+
+   if(length(LineDir)>1e-4)
+   {
+	   //remap 0~1 back to -1~1
+	   LineDir.x = -1 + LineDir.x*2; 
+	   LineDir.y = -1 + LineDir.y*2;
+	   LineDir.z = -1 + LineDir.z*2;
+	   LineDir = normalize(LineDir);
+
+	   ////now, calculate 2D "gradient" (slope) on screen:
+
+	   //note: assume "up" direction is (0,0,1)
+   
+	   vec3 right = normalize(cross(dir, vec3(0,0,1)));
+	   vec3 Up = normalize(cross(right, dir));
+	   vec3 Dir = normalize(cross(Up, right));
+   
+	   //project this fragment's "line direction" to the right-Up plane (plane normal is Dir)
+	   vec3 Proj = LineDir - dot(LineDir, Dir) * Dir;
+
+	   //calculate the angle of Proj and right using arcos of absolute cos (this is the "gradient")
+	   float angle = acos(abs(dot(Proj, right)));  //90' to 0'
+   
+	   gl_FragColor = vec4(angle/(PI/2), 0, ((PI/2)-angle)/(PI/2), 1);
+	}
+	else
+	{
+		gl_FragColor = vec4(0,0,0,1);
+	}
+}

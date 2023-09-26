@@ -1,0 +1,41 @@
+#version 130
+
+varying vec3 N;
+varying vec3 v;  
+varying vec4 p;  //original position in object space
+
+//correspond to opengl bind textures:
+uniform sampler2D texture0;
+//uniform sampler2D texture1;
+
+//uniform float camera_height;  //height of the small circle w.s.t the big circle w/ radius=1
+
+#define PI 3.14159265358979323846264338
+
+void main (void)  
+{
+    //calculate this fragment's tex coord by its world space coord p:
+        
+    vec2 dir = normalize(vec2(p.x, p.y));
+    //horizontal CW angle from (-1,0)  (we are look at (1,0))
+    float azimuth = - mod( atan(-dir.y, -dir.x) , 2*PI);
+    if(azimuth<0)  //if CW rotates backwards...
+        azimuth = azimuth + 2*PI;
+    float ratio_horizontal = azimuth / (2*PI);  //to 0~1 ratio
+    
+    //original zenith of the small sphere:
+    float zenith = PI/2 - atan(p.z, length(vec2(p.x, p.y)));  //0~PI from the north pole
+
+    //translate to zenith of the big sphere:
+    float camera_height = 0.3;
+    float r = 1 - camera_height;  //small circle radius
+    float fovy = radians(45);
+    float b = r * cos(fovy);
+    float h = b * tan(PI/2 - zenith);
+    float H = camera_height + h;
+    float Zenith = PI/2 - atan(H,b);
+
+    float ratio_vertical = Zenith / PI;
+        
+    gl_FragColor = texture(texture0, vec2(ratio_horizontal, ratio_vertical));
+}

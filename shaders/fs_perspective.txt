@@ -1,0 +1,78 @@
+#version 130
+
+varying vec3 N;
+varying vec3 v;  
+varying vec4 p;  //original position in object space
+
+//correspond to opengl bind textures:
+uniform sampler2D texture_main;
+uniform sampler1D texture_sdepth;
+
+uniform int draw_texture;  //draw the "picture" texture or not?
+uniform float sdepth_max;  //"spherical depth" max value
+uniform mat3 RR;  //rotation matrix (column-major) for dir
+uniform vec3 tt;  //translation vector for dir
+uniform float animate_progress;
+uniform float dim;
+
+#define PI 3.14159265358979323846264338
+
+void main (void)  
+{  
+   vec3 L = normalize(gl_LightSource[0].position.xyz - v);   
+   vec3 E = normalize(-v); // we are in Eye Coordinates, so EyePos is (0,0,0)  
+   vec3 R = normalize(-reflect(L,N));  
+ 
+   //calculate Ambient Term:  
+   vec4 Iamb = gl_FrontLightProduct[0].ambient;    
+
+   //calculate Diffuse Term: 
+   vec4 Idiff = gl_FrontLightProduct[0].diffuse * max(dot(N,L), 0.0);
+      
+   // calculate Specular Term:
+   vec4 Ispec = gl_FrontLightProduct[0].specular 
+                * pow(max(dot(R,E),0.0), gl_FrontMaterial.shininess);
+
+   // write Total Color:  
+   gl_FragColor = gl_FrontLightModelProduct.sceneColor + Iamb + Idiff + Ispec;   
+   
+   if(draw_texture == 1)
+   {
+        //calculate this fragment's tex coord by its world space "dir" (from coord p):
+        vec3 dir = vec3(p.x, p.y, p.z);
+        dir = normalize(dir);
+        
+        //simulate camera motion?
+        if(false)
+        {
+           //esimtate the "depth" of this fragment:
+           float azimuth_old = mod( atan(dir.y, dir.x), 2*PI);  
+           float ratio_horizontal_old = azimuth_old / (2*PI);
+           float depth = texture(texture_sdepth, ratio_horizontal_old).x * sdepth_max;  //this is the depth in the "middle"
+	       float zenith_old = atan(length(vec2(dir.x, dir.y)), dir.z);  //0~PI from the north pole
+           float angle_deviation_vertical = PI/2 - zenith_old;
+           depth = depth / cos(angle_deviation_vertical);  //this is the calculated depth by "cylindral" formula
+           //interpolate w.r.t. 1 by animate_progress (0~1)? nope
+           //depth = 1 + (depth - 1) * animate_progress;
+
+           //interporlate R w.r.t. identity by animate_progress
+           mat3 RR_ = mat3(1.0) + (RR - mat3(1.0)) * animate_progress;
+
+           //interpolate t w.r.t. 0 by animate_progress
+           vec3 tt_ = vec3(0.0) + (tt - vec3(0.0)) * animate_progress;
+
+           dir = RR_ * (dir * depth) + tt_;
+        }
+                    
+        float azimuth = mod( atan(dir.y, dir.x) , 2*PI);        
+        float ratio_horizontal = azimuth / (2*PI);  //to 0~1 ratio        
+        
+        float zenith = atan(length(vec2(dir.x, dir.y)), dir.z);  //0~PI from the north pole
+        float ratio_vertical = zenith / PI;
+        
+        gl_FragColor = texture(texture_main, vec2(ratio_horizontal, ratio_vertical));
+
+        //dim?
+        gl_FragColor.xyz = gl_FragColor.xyz * (1-dim) + vec3(dim,dim,dim);
+    }
+}

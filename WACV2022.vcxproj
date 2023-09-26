@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9b68ea8e-08e9-40e7-a1b3-e1e0ebc26ce7}</ProjectGuid>
+    <RootNamespace>WACV2022</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>ilmbase22/include;glfw/include;glut;glew/include;cwc/include;opencv/include;ceres-solver/config;ceres-solver/include;ceres-solver/internal;ceres-solver/internal/ceres;ceres-solver/internal/ceres/miniglog;eigen</AdditionalIncludeDirectories>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>true</OpenMPSupport>
+      <DisableSpecificWarnings>4267;4996;4244;4018;4305</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>ilmbase22\lib\release;glfw\lib-vc2010-64;glut;opencv\lib;OpenMVG\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;shlwapi.lib;opengl32.lib;glfw3.lib;glut32.lib;Imath-2_2.lib;Iex-2_2.lib;IexMath-2_2.lib;opencv_world345.lib;third_party\ceres-solver\lib\Release\openMVG_ceres.lib;openMVG_cxsparse.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="cwc\source\glsl.cpp">
+      <SDLCheck Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </SDLCheck>
+      <ConformanceMode Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ConformanceMode>
+    </ClCompile>
+    <ClCompile Include="Depth.cpp" />
+    <ClCompile Include="glew\source\glew.c" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SphereMesh.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Basic.h" />
+    <ClInclude Include="cwc\include\glsl.h" />
+    <ClInclude Include="Depth.h" />
+    <ClInclude Include="ILMBase.h" />
+    <ClInclude Include="SphereMesh.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="stb_image_resize.h" />
+    <ClInclude Include="stb_image_write.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

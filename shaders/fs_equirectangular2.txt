@@ -1,0 +1,99 @@
+#version 130
+
+varying vec3 N;
+varying vec3 v;  
+varying vec4 p;  //original position in object space (x: 0~1, y: 0~1, z=0)
+
+//correspond to opengl bind textures:
+uniform sampler2D texture0;
+//uniform sampler2D texture1;
+uniform samplerCube cubemap; // cubemap texture sampler
+
+uniform float panorama_fovy;  //total fovy of the original panorama projection. in radian
+uniform float panorama_middle;  //middle horizontal angle (default: 0')
+
+#define PI 3.141592653589793238462643
+
+//CCW rotation matrix
+mat4 rotationMatrix(vec3 axis, float angle)
+{
+    axis = normalize(axis);
+    float s = -1 * sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    
+    return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+                0.0,                                0.0,                                0.0,                                1.0);
+}
+
+void main (void)  
+{  
+   ////upper part: "top" view:
+   float top_fovy = radians(60.0);
+   float top_portion = top_fovy / PI; 
+   float bottom_fovy = radians(0.0);
+   float bottom_portion = bottom_fovy / PI; 
+   if(p.y >= (1 - top_portion))
+   { 
+      float x = p.x;
+      float y = (p.y - (1 - top_portion)) / top_portion;  //to 0~1
+      
+      float tilt_angle = top_fovy * y*y;  //"tilt" angle of this ring
+      
+      //azimuth and zenith angle before tilt:
+	  float azimuth = PI - x * 2 * PI;  //0~1 to 180' to -180'
+      azimuth = mod(azimuth + panorama_middle, 2*PI);
+	  float zenith = top_fovy * (1 - y);  //radius (i.e., zenith, radian) of this ring
+
+      vec3 pos = vec3(sin(zenith) * cos(azimuth), sin(zenith) * sin(azimuth), cos(zenith));
+	  
+      //let's tilt (rotate) the pos!
+      vec3 tilt_axis = vec3(cos(radians(-90.0)+panorama_middle), sin(radians(-90.0)+panorama_middle), 0);
+      vec4 rotated = rotationMatrix(tilt_axis, tilt_angle) * vec4(pos,1);
+      pos = vec3(rotated);
+
+      gl_FragColor = texture(cubemap, pos);      
+   }
+   ////lower part: "bottom" view
+   else if(p.y <= (bottom_portion))
+   { 
+      float x = p.x;
+      float y = (bottom_portion - p.y) / bottom_portion;  //to 1~0
+      
+      float tilt_angle = bottom_fovy * y*y;  //"tilt" angle of this ring      
+
+      //azimuth and zenith angle before tilt:
+	  float azimuth = PI - x * 2 * PI;  //0~1 to 180' to -180'
+      azimuth = mod(azimuth + panorama_middle, 2*PI);
+	  float zenith = (PI - bottom_fovy) + bottom_fovy * y;  //radius (i.e., zenith, radian) of this ring
+
+      vec3 pos = vec3(sin(zenith) * cos(azimuth), sin(zenith) * sin(azimuth), cos(zenith));
+	  
+      //let's tilt (rotate) the pos!
+      vec3 tilt_axis = vec3(cos(radians(-90.0)+panorama_middle), sin(radians(-90.0)+panorama_middle), 0);
+      vec4 rotated = rotationMatrix(tilt_axis, -tilt_angle) * vec4(pos,1);
+      pos = vec3(rotated);
+
+      gl_FragColor = texture(cubemap, pos);      
+   }
+   ////middle part: equirectangular panorama
+   else
+   {
+      //get color from the cubemap, index by dir from (0,0,0)
+      //the dir is a position on a sphere indexed by azimuth (horizontal) and zenith (vertical)
+
+      float x = p.x;
+      float y = p.y;
+   
+      float azimuth = PI - x * 2 * PI;  //0~1 to 180' to -180'
+      azimuth = mod(azimuth + panorama_middle, 2*PI);
+
+      float zenith = PI/2 + (1 - y - 0.5) * panorama_fovy;  //0 ~ 1 to (nearly) fovy ~ 0 (because zenith is from north pole)
+      
+      vec3 pos = vec3(sin(zenith)*cos(azimuth), sin(zenith)*sin(azimuth), cos(zenith));  //the normalized dir to index cubemap
+      gl_FragColor = texture(cubemap, pos);
+   }
+   
+}
