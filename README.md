@@ -7,7 +7,7 @@ Getting the project
 git clone 
 
 # To start
-2.create folder 
+2. create folder 
 ```
  |-- WACV2022
      |-- rgb
@@ -25,11 +25,11 @@ git clone
      |-- result
      |-- test_images
 ```
-
-2.run main.cpp with command-line arguments
+# And you can run the command:
+3. run main.cpp with command-line arguments
 ```
-g++ -o myprogram main.cpp
+ g++ -o myprogram main.cpp
 ```
 ```
-./myprogram 0 .\\rgb\\ .\\gt\\ .\\baseline\\ .\\result\\
+ ./myprogram 0 .\\rgb\\ .\\gt\\ .\\baseline\\ .\\result\\
 ```
