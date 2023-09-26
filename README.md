@@ -4,7 +4,7 @@ Visual Studio >= 2019 (recommended)
 
 Getting the project
 1. Getting the sources shell
-git clone https://github.com/CBS5181/PanoramicCameraPose.git
+git clone 
 
 # To start
 2.create folder 
@@ -27,5 +27,9 @@ git clone https://github.com/CBS5181/PanoramicCameraPose.git
 ```
 
 2.run main.cpp with command-line arguments
+```
 g++ -o myprogram main.cpp
-./myprogram 0 .\\rgb\\ .\\gt\\ .\\baseline\\ .\\result\\ 
+```
+```
+./myprogram 0 .\\rgb\\ .\\gt\\ .\\baseline\\ .\\result\\
+```
