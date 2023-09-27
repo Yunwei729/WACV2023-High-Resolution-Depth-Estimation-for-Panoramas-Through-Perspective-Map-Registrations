@@ -26,7 +26,7 @@ git clone https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation
      |-- result
      |-- test_images
 ```
-# And you can run the command:
+# And you can run the command
 3. run main.cpp with command-line arguments
 ```
  g++ -o myprogram main.cpp
@@ -34,7 +34,8 @@ git clone https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation
 ```
  ./myprogram 0 .\\rgb\\ .\\gt\\ .\\baseline\\ .\\result\\
 ```
-And also these:
+# Citation
+Please cite our paper for any purpose of usage：
 ```
 @InProceedings{Peng_2023_WACV,
 author = {Peng, Chi-Han and Zhang, Jiayao},
