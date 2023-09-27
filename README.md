@@ -1,9 +1,9 @@
 # WACV2023 High Resolution Depth Estimation for 360deg Panoramas Through Perspective and Panoramic Dep
 Chi-Han Peng and Jiayao Zhang <br>
 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2023 <br>
-[Paper](https://pengchihan.co/papers/Peng_High-Resolution_Depth_Estimation_for_360deg_Panoramas_Through_Perspective_and_Panoramic_WACV_2023_paper.pdf) |  
-[Supplemental](https://pengchihan.co/papers/Peng_High-Resolution_Depth_Estimation_WACV_2023_supplemental.pdf) |  
-[Poster](https://pengchihan.co/papers/1428-wacv-post.pdf) |  
+[Paper](https://pengchihan.co/papers/Peng_High-Resolution_Depth_Estimation_for_360deg_Panoramas_Through_Perspective_and_Panoramic_WACV_2023_paper.pdf) 
+[Supplemental](https://pengchihan.co/papers/Peng_High-Resolution_Depth_Estimation_WACV_2023_supplemental.pdf) |
+[Poster](https://pengchihan.co/papers/1428-wacv-post.pdf) |
 [Video](https://pengchihan.co/papers/1428-wacv.mp4)
 
 # Methodology
