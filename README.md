@@ -10,7 +10,7 @@ IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2023 <br>
 ![WACV_overview](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-360deg-Panoramas-Through-Perspective-and-Panoramic-Dep/assets/77334402/c0d8f378-f7bc-448f-862a-5750b7c76db6)
 
 # Datasets
-In this project, we introduce the term 'baseline,' which specifically refers to depth maps generated using existing computer vision methods such as [Unifuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion/blob/main/UniFuse/Matterport3D/README.md) or hohonet. It is used for comparing and evaluating the performance of other depth map generation algorithms.
+In this project, we introduce the term 'baseline,' which specifically refers to depth maps generated using existing computer vision methods such as [Unifuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) or [HoHoNet](https://github.com/sunset1995/HoHoNet). It is used for comparing and evaluating the performance of other depth map generation algorithms.
 
 # WACV2023 Required:
 Visual Studio >= 2019 (recommended)
