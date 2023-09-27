@@ -34,3 +34,14 @@ git clone https://github.com/B10756015/WACV2022.git
 ```
  ./myprogram 0 .\\rgb\\ .\\gt\\ .\\baseline\\ .\\result\\
 ```
+And also these:
+```
+@InProceedings{Peng_2023_WACV,
+author = {Peng, Chi-Han and Zhang, Jiayao},
+title = {High-Resolution Depth Estimation for 360deg Panoramas Through Perspective and Panoramic Depth Images Registration},
+booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+month = {January},
+year = {2023},
+pages = {3116-3125}
+}
+```
