@@ -4,7 +4,7 @@ https://pengchihan.co/papers/Peng_High-Resolution_Depth_Estimation_for_360deg_Pa
 
 # Methodology
 ![WACV_overview](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-360deg-Panoramas-Through-Perspective-and-Panoramic-Dep/assets/77334402/c0d8f378-f7bc-448f-862a-5750b7c76db6)
-Chi-Han Peng and Jiayao Zhang
+Chi-Han Peng and Jiayao Zhang <br>
 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2023
 
 # WACV2023 Required:
