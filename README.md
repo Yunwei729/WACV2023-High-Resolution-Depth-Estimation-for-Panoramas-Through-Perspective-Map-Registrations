@@ -1,11 +1,11 @@
-# WACV2022
-# WACV2022 Required:
+# WACV2023 High Resolution Depth Estimation for 360deg Panoramas Through Perspective and Panoramic Dep
+# WACV2023 Required:
 Visual Studio >= 2019 (recommended)
 
 Getting the project
 1. Getting the sources shell
 ```
-git clone https://github.com/B10756015/WACV2022.git
+git clone https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-360deg-Panoramas-Through-Perspective-and-Panoramic-Dep.git
 ```
 # To start
 2. create folder 
