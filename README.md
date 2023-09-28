@@ -1,4 +1,4 @@
-# WACV2023-High Resolution Depth Estimation for Panoramas Through Perspective Map Registrations
+![127](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-Panoramas-Through-Perspective-Map-Registrations/assets/77334402/bae79da0-8c58-4abc-a93f-3c6cc6723442)![image](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-Panoramas-Through-Perspective-Map-Registrations/assets/77334402/7f1d526f-4ffc-467d-8ef2-ed3430f7f8b0)# WACV2023-High Resolution Depth Estimation for Panoramas Through Perspective Map Registrations
 WACV2023-High-Resolution Depth Estimation for 360deg Panoramas Through Perspective and Panoramic Depth Images Registration <br>
 Chi-Han Peng and Jiayao Zhang <br>
 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2023 <br>
@@ -8,7 +8,8 @@ IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2023 <br>
 [Video](https://pengchihan.co/papers/1428-wacv.mp4)
 
 # Methodology
-![WACV_overview](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-360deg-Panoramas-Through-Perspective-and-Panoramic-Dep/assets/77334402/c0d8f378-f7bc-448f-862a-5750b7c76db6)
+![127](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-Panoramas-Through-Perspective-Map-Registrations/assets/77334402/c2308ca3-d73a-4e61-9c03-4a8f7d773231)
+
 
 # Datasets
 In this project, we introduce the term 'baseline,' which specifically refers to depth maps generated using existing computer vision methods such as [Unifuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) or [HoHoNet](https://github.com/sunset1995/HoHoNet). It is used for comparing and evaluating the performance of other depth map generation algorithms.
