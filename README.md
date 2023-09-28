@@ -8,7 +8,7 @@ IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2023 <br>
 [Video](https://pengchihan.co/papers/1428-wacv.mp4)
 
 # Methodology
-![127](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-Panoramas-Through-Perspective-Map-Registrations/assets/77334402/bae79da0-8c58-4abc-a93f-3c6cc6723442)![image](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-Panoramas-Through-Perspective-Map-Registrations/assets/77334402/7f1d526f-4ffc-467d-8ef2-ed3430f7f8b0)
+![127](https://github.com/Yunwei729/WACV2023-High-Resolution-Depth-Estimation-for-Panoramas-Through-Perspective-Map-Registrations/assets/77334402/bae79da0-8c58-4abc-a93f-3c6cc6723442)
 
 
 # Datasets
