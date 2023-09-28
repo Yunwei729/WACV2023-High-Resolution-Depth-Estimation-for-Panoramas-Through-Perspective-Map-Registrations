@@ -13,7 +13,7 @@ IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2023 <br>
 # Datasets
 In this project, we introduce the term 'baseline,' which specifically refers to depth maps generated using existing computer vision methods such as [Unifuse](https://github.com/alibaba/UniFuse-Unidirectional-Fusion) or [HoHoNet](https://github.com/sunset1995/HoHoNet). It is used for comparing and evaluating the performance of other depth map generation algorithms.
 
-# WACV2023 Required:
+# WACV2023 Requirements:
 Visual Studio >= 2019 (recommended)
 
 Getting the project
